@@ -1,0 +1,54 @@
+name: Paper Radar
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run now, ignoring the configured schedule"
+        required: false
+        default: "true"
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Paper Radar
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          WORKFLOW_FORCE: ${{ github.event.inputs.force }}
+        run: |
+          if [ "$WORKFLOW_FORCE" = "true" ]; then
+            python app/worker/paper_radar.py --force
+          else
+            python app/worker/paper_radar.py
+          fi
+
+      - name: Commit updated records and reports
+        run: |
+          if [ -n "$(git status --porcelain data reports)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data reports
+            git commit -m "Update paper radar records"
+            git push
+          else
+            echo "No data or report changes."
+          fi
