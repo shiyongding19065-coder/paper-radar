@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paper Radar</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar">
+        <div>
+          <h1>Paper Radar</h1>
+          <p>管理论文主题、邮件目标、自动周期和每次下载上限。</p>
+        </div>
+        <div class="actions">
+          <button id="loadConfig">加载配置</button>
+          <button id="saveConfig" class="primary">保存配置</button>
+          <button id="runNow">立即运行</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>GitHub 连接</h2>
+        <div class="grid four">
+          <label>Owner<input id="owner" placeholder="your-name" /></label>
+          <label>Repo<input id="repo" placeholder="paper-radar" /></label>
+          <label>Branch<input id="branch" value="main" /></label>
+          <label>Token<input id="token" type="password" placeholder="GitHub token" /></label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>自动周期</h2>
+        <div class="grid five">
+          <label>启用<select id="scheduleEnabled"><option value="true">启用</option><option value="false">暂停</option></select></label>
+          <label>周期<select id="mode"><option value="daily">每天</option><option value="weekly">每周</option><option value="monthly">每月</option><option value="hourly">每小时</option></select></label>
+          <label>星期<select id="dayOfWeek"><option value="monday">周一</option><option value="tuesday">周二</option><option value="wednesday">周三</option><option value="thursday">周四</option><option value="friday">周五</option><option value="saturday">周六</option><option value="sunday">周日</option></select></label>
+          <label>月内日期<input id="dayOfMonth" type="number" min="1" max="28" /></label>
+          <label>时间<input id="time" type="time" /></label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>邮件设置</h2>
+        <div class="grid four">
+          <label>发送服务<select id="provider"><option value="resend">Resend</option><option value="smtp">SMTP</option></select></label>
+          <label>发件人<input id="from" placeholder="paper@example.com" /></label>
+          <label>附件上限 MB<input id="maxAttachment" type="number" min="1" max="50" /></label>
+          <label>附加 PDF<select id="attachPdfs"><option value="true">是</option><option value="false">否，只发链接</option></select></label>
+        </div>
+        <label>默认收件人<textarea id="defaultRecipients" placeholder="每行一个邮箱"></textarea></label>
+      </section>
+
+      <section class="panel">
+        <div class="row">
+          <h2>主题</h2>
+          <button id="addTopic">新增主题</button>
+        </div>
+        <div id="topics"></div>
+      </section>
+
+      <p id="status" class="status"></p>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
