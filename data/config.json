@@ -18,7 +18,15 @@
   "search": {
     "default_sources": [
       "arxiv",
-      "openalex"
+      "openalex",
+      "semantic_scholar",
+      "crossref",
+      "pubmed",
+      "europe_pmc",
+      "datacite",
+      "doaj",
+      "biorxiv",
+      "medrxiv"
     ],
     "lookback_days": 14,
     "max_results_per_source": 25,
@@ -36,7 +44,15 @@
       "exclude_keywords": [],
       "sources": [
         "arxiv",
-        "openalex"
+        "openalex",
+        "semantic_scholar",
+        "crossref",
+        "pubmed",
+        "europe_pmc",
+        "datacite",
+        "doaj",
+        "biorxiv",
+        "medrxiv"
       ],
       "recipients": [],
       "max_downloads_per_run": 10,

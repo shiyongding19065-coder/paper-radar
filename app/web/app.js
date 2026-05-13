@@ -181,7 +181,7 @@ function addTopic() {
     enabled: true,
     keywords: [],
     exclude_keywords: [],
-    sources: ["arxiv", "openalex"],
+    sources: ["arxiv", "openalex", "semantic_scholar", "crossref", "pubmed", "europe_pmc", "datacite", "doaj", "biorxiv", "medrxiv"],
     recipients: [],
     max_downloads_per_run: 10,
     attach_pdfs: true,
@@ -224,7 +224,7 @@ loadSavedSettings();
 config = {
   schedule: { enabled: true, mode: "weekly", day_of_week: "monday", day_of_month: 1, time: "09:00", timezone: "Europe/London" },
   email: { provider: "resend", from: "", default_recipients: [], attach_pdfs: true, max_total_attachment_mb: 20 },
-  search: { default_sources: ["arxiv", "openalex"], lookback_days: 14, max_results_per_source: 25, open_access_only: true },
+  search: { default_sources: ["arxiv", "openalex", "semantic_scholar", "crossref", "pubmed", "europe_pmc", "datacite", "doaj", "biorxiv", "medrxiv"], lookback_days: 14, max_results_per_source: 25, open_access_only: true },
   topics: [],
 };
 renderConfig();

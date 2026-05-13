@@ -51,4 +51,7 @@ The token is stored only in your browser local storage. The UI uses it to load/s
 - PDFs are deleted automatically when the run ends.
 - The repository keeps `data/papers.json` to prevent repeat downloads and repeat emails.
 - Each topic has `max_downloads_per_run`, adjustable from the web UI.
-- The default search sources are arXiv and OpenAlex.
+- Supported search sources are `arxiv`, `openalex`, `semantic_scholar`, `crossref`, `pubmed`, `europe_pmc`, `datacite`, `doaj`, `biorxiv`, and `medrxiv`.
+- Add search sources in the web UI one per line. Unknown source names are ignored.
+- `SEMANTIC_SCHOLAR_API_KEY` is optional; add it as a repository secret if you want higher Semantic Scholar API limits.
+- DOI-based results are also checked with Unpaywall when `MAIL_FROM` is configured, so more legal open-access PDF links can be discovered.
